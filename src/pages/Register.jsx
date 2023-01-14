@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Formik } from "formik";
 
 function Copyright(props) {
     return (
@@ -59,8 +60,11 @@ export default function Register() {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign up
+                        Register
                     </Typography>
+                    <Formik>
+
+                    </Formik>
                     <Box
                         component="form"
                         noValidate
