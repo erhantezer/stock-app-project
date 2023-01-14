@@ -1,6 +1,5 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -12,24 +11,10 @@ import Grid from "@mui/material/Grid";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { LoadingButton } from "@mui/lab";
+import { Form, Formik } from "formik";
+import VpnKeyIcon from '@mui/icons-material/VpnKey';
 
-function Copyright(props) {
-    return (
-        <Typography
-            variant="body2"
-            color="text.secondary"
-            align="center"
-            {...props}
-        >
-            {"Copyright © "}
-            <Link color="inherit" href="https://mui.com/">
-                Your Website
-            </Link>{" "}
-            {new Date().getFullYear()}
-            {"."}
-        </Typography>
-    );
-}
 
 const theme = createTheme();
 
@@ -77,60 +62,41 @@ export default function Login() {
                             <LockOutlinedIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
-                            Sign in
+                            Login
                         </Typography>
-                        <Box
-                            component="form"
-                            noValidate
-                            onSubmit={handleSubmit}
-                            sx={{ mt: 1 }}
-                        >
+                        <Formik sx={{m:2}}>
+                            <Form >
                             <TextField
-                                margin="normal"
+                                sx={{mt:2}}
                                 required
                                 fullWidth
                                 id="email"
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
-                                autoFocus
-                            />
+                                />
                             <TextField
-                                margin="normal"
+                                sx={{mt:2}}
                                 required
                                 fullWidth
                                 name="password"
                                 label="Password"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
-                            />
-                            <FormControlLabel
-                                control={<Checkbox value="remember" color="primary" />}
-                                label="Remember me"
-                            />
-                            <Button
-                                type="submit"
+                                autoComplete="new-password"
+                                />
+                                <LoadingButton
+                                sx={{mt:2}}
+                                endIcon={<VpnKeyIcon />}
                                 fullWidth
+                                loading={false}
+                                loadingPosition="center"
                                 variant="contained"
-                                sx={{ mt: 3, mb: 2 }}
-                            >
-                                Sign In
-                            </Button>
-                            <Grid container>
-                                <Grid item xs>
-                                    <Link href="#" variant="body2">
-                                        Forgot password?
-                                    </Link>
-                                </Grid>
-                                <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {"Don't have an account? Sign Up"}
-                                    </Link>
-                                </Grid>
-                            </Grid>
-                            <Copyright sx={{ mt: 5 }} />
-                        </Box>
+                                >
+                                    Login
+                                </LoadingButton>
+                            </Form>
+                        </Formik>
                     </Box>
                 </Grid>
             </Grid>
