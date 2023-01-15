@@ -38,7 +38,7 @@ const Login = () => {
                 justifyContent="center"
                 direction="row-reverse"
                 sx={{
-                    height: "100vh",
+                    height: "97vh",
                     p: 2,
                 }}
             >
@@ -85,7 +85,7 @@ const Login = () => {
 
                 <Grid item xs={10} sm={7} md={6}>
                     <Container>
-                        <img src={image} alt="img" />
+                        <img src={image} alt="img"  />
                     </Container>
                 </Grid>
             </Grid>
