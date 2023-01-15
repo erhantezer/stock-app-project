@@ -5,12 +5,33 @@ import LockIcon from "@mui/icons-material/Lock";
 import { Formik } from "formik";
 import image from "../assets/result.svg";
 import Grid from "@mui/material/Grid";
-// import RegisterForm, { registerSchema } from "../components/RegisterForm";
+import RegisterForm from "../components/RegisterForm";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
+import * as Yup from "yup";
 // import useAuthCalls from "../hooks/useAuthCalls";
 
+const registerSchema = Yup.object().shape({
+    username: Yup.string()
+        .max(10, "username must have less than 10 chars")
+        .required(),
+    first_name: Yup.string()
+        .max(20, "first name must have less than 20 chars")
+        .required(),
+    last_name: Yup.string()
+        .max(20, "last name must have less than 20 chars")
+        .required(),
 
+    email: Yup.string().email().required(),
+    password: Yup.string()
+        .required()
+        .min(8, "Password must have min 8 chars")
+        .max(16, "Password must have max 16 chars")
+        .matches(/\d+/, "Password must have a number")
+        .matches(/[a-z]+/, "Password must have a lowercase")
+        .matches(/[A-Z]+/, "Password must have an uppercase")
+        .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
+});
 
 
 export default function Register() {
@@ -62,13 +83,13 @@ export default function Register() {
                             email: "",
                             password: "",
                         }}
-                        // validationSchema={registerSchema}
+                        validationSchema={registerSchema}
                         onSubmit={(values, actions) => {
                             // register({ ...values, password2: values.password });
                             actions.resetForm();
                             actions.setSubmitting(false);
                         }}
-                        // component={(props) => <RegisterForm {...props} />}
+                    component={(props) => <RegisterForm {...props} />}
                     ></Formik>
                     <Box sx={{ textAlign: "center", mt: 2 }}>
                         <Link to="/">Do you have an account?</Link>
@@ -80,7 +101,7 @@ export default function Register() {
                         <img src={image} alt="" />
                     </Container>
                 </Grid>
-                
+
             </Grid>
         </Container>
     );

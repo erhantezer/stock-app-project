@@ -3,7 +3,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { blueGrey, grey } from "@mui/material/colors";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import store, { persistor} from "./app/store";
+import store, { persistor } from "./app/store";
 import AppRouter from "./router/AppRouter";
 import { PersistGate } from "redux-persist/integration/react";
 

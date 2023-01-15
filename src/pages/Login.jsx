@@ -7,8 +7,26 @@ import { Formik } from "formik";
 import LockIcon from "@mui/icons-material/Lock";
 import image from "../assets/result.svg";
 import { Link } from "react-router-dom";
-// import LoginForm, { loginSchema } from "../components/LoginForm";
+import * as Yup from "yup";
+import LoginForm from "../components/LoginForm";
+// import LoginForm from "../components/LoginForm";
 // import useAuthCalls from "../hooks/useAuthCalls";
+
+
+const loginSchema = Yup.object().shape({
+    email: Yup.string()
+        .email("Please enter valid email")
+        .required("Email is mandatory"),
+    password: Yup.string()
+        .min(8, "Password must have min 8 chars")
+        .max(16, "Password must have max 16 chars")
+        .matches(/\d+/, "Password must have a number")
+        .matches(/[a-z]+/, "Password must have a lowercase")
+        .matches(/[A-Z]+/, "Password must have an uppercase")
+        .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
+});
+
+
 
 const Login = () => {
     // const { login } = useAuthCalls();
@@ -52,13 +70,13 @@ const Login = () => {
 
                     <Formik
                         initialValues={{ email: "", password: "" }}
-                        // validationSchema={loginSchema}
+                        validationSchema={loginSchema}
                         onSubmit={(values, actions) => {
                             // login(values);
                             actions.resetForm();
                             actions.setSubmitting(false);
                         }}
-                        // component={(props) => <LoginForm {...props} />}
+                    component={(props) => <LoginForm {...props} />}
                     ></Formik>
                     <Box sx={{ textAlign: "center", mt: 2 }}>
                         <Link to="/register">Do you have not an account?</Link>
