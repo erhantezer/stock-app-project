@@ -29,3 +29,11 @@ const store = configureStore({
 
 export const persistor = persistStore(store)
 export default store;
+
+
+//! Redux persist, redux’taki değişkenlerin, sayfa yenilendiğinde,
+//! değiştiğinde veya uygulama kapatıp tekrar açıldığında tekrar eski haline dönmesini veya 
+//! sıfırlanmasını engellemeye yarayan, bu değişkenleri localstorage da saklayan bir pakettir
+
+//! redux-persist paketi, bir değişkeni tekrar tekrar istek atıp set işlemi yapmak yerine 
+//! tek bir istekte setleyip siz değiştirmediğiniz sürece aynı kalması sebebiyle kullanışlı bir pakettir.
