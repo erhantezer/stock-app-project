@@ -77,7 +77,6 @@ const MenuListItems = () => {
                       </ListItemButton>
                     )}
 
-
                     {!item.url.includes("http") && (
                       <ListItemButton onClick={() => navigate(item.url)} sx={iconStyle}>
                             <ListItemIcon>
