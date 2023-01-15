@@ -54,20 +54,38 @@ const MenuListItems = () => {
       title: "Admin Panel",
       url: "https://13549.fullstack.clarusway.com/admin",
     },
-    
-  
   ]
+
+  const iconStyle = {
+    color: "#eee",
+    "& .MuiSvgIcon-root":{color:"#eee"},
+    "&:hover": {color:"red", bgcolor:"lightBlue"},
+    "&:hover .MuiSvgIcon-root":{color:"red"}
+  }
+
   return (
     <div>
       <List>
                 {navItems?.map((item, index) => (
                     <ListItem key={index} disablePadding>
-                        <ListItemButton onClick={() => navigate(item.url)}>
+                    {item.url.includes("http") && (
+                      <ListItemButton to={item.url} sx={iconStyle}>
+                            <ListItemIcon>
+                                {item.icon}
+                            </ListItemIcon>
+                            <ListItemText primary={item.title} />
+                      </ListItemButton>
+                    )}
+
+
+                    {!item.url.includes("http") && (
+                      <ListItemButton onClick={() => navigate(item.url)} sx={iconStyle}>
                             <ListItemIcon>
                                 {item.icon}
                             </ListItemIcon>
                             <ListItemText primary={item.title} />
                         </ListItemButton>
+                    )}
                     </ListItem>
                 ))}
             </List>
