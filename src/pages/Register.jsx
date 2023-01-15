@@ -5,7 +5,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import { Formik } from "formik";
 import image from "../assets/result.svg";
 import Grid from "@mui/material/Grid";
-import RegisterForm, { registerSchema } from "../components/RegisterForm";
+// import RegisterForm, { registerSchema } from "../components/RegisterForm";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 // import useAuthCalls from "../hooks/useAuthCalls";
@@ -62,13 +62,13 @@ export default function Register() {
                             email: "",
                             password: "",
                         }}
-                        validationSchema={registerSchema}
+                        // validationSchema={registerSchema}
                         onSubmit={(values, actions) => {
                             // register({ ...values, password2: values.password });
                             actions.resetForm();
                             actions.setSubmitting(false);
                         }}
-                        component={(props) => <RegisterForm {...props} />}
+                        // component={(props) => <RegisterForm {...props} />}
                     ></Formik>
                     <Box sx={{ textAlign: "center", mt: 2 }}>
                         <Link to="/">Do you have an account?</Link>
@@ -80,6 +80,7 @@ export default function Register() {
                         <img src={image} alt="" />
                     </Container>
                 </Grid>
+                
             </Grid>
         </Container>
     );
