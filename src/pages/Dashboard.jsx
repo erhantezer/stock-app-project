@@ -11,10 +11,17 @@ import Typography from '@mui/material/Typography';
 import MenuListItems from '../components/MenuListItems';
 import { blueGrey } from '@mui/material/colors';
 import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import useAuthCalls from '../hooks/useAuthCalls';
+import { Button } from '@mui/material';
 
 const drawerWidth = 200;
 
 function Dashboard(props) {
+
+    const { currentUser } = useSelector((state) => state.auth);
+    const { logout } = useAuthCalls()
+
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -55,9 +62,11 @@ function Dashboard(props) {
                     <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
                         Stock App
                     </Typography>
-                    <Typography variant="h6" noWrap component="div">
-                        Logout
-                    </Typography>
+                    {currentUser && (
+                        <Button color="inherit" onClick={() => logout()}> 
+                            Logout 
+                        </Button>
+                    )}
                 </Toolbar>
             </AppBar>
             <Box
@@ -106,10 +115,10 @@ function Dashboard(props) {
                 component="main"
                 sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
             >
-            <Toolbar />
-            <Outlet/>
+                <Toolbar />
+                <Outlet />
             </Box>
-            
+
         </Box>
     );
 }
