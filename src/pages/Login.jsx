@@ -9,8 +9,7 @@ import image from "../assets/result.svg";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import LoginForm from "../components/LoginForm";
-// import LoginForm from "../components/LoginForm";
-// import useAuthCalls from "../hooks/useAuthCalls";
+import useAuthCalls from "../hooks/useAuthCalls";
 
 
 const loginSchema = Yup.object().shape({
@@ -29,7 +28,8 @@ const loginSchema = Yup.object().shape({
 
 
 const Login = () => {
-    // const { login } = useAuthCalls();
+    const { login } = useAuthCalls(); //! custom hook içinde login işlemi yazarak redux ile state işlemi yaptık.
+    //! loginden value lar logine gönderip orada async await işlemiyle data yı çekip dispatch ile authSlice gönderdik
 
     return (
         <Container maxWidth="lg">
@@ -72,7 +72,7 @@ const Login = () => {
                         initialValues={{ email: "", password: "" }}
                         validationSchema={loginSchema}
                         onSubmit={(values, actions) => {
-                            // login(values);
+                            login(values);
                             actions.resetForm();
                             actions.setSubmitting(false);
                         }}
