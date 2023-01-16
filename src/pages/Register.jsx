@@ -9,7 +9,7 @@ import RegisterForm from "../components/RegisterForm";
 import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 import * as Yup from "yup";
-// import useAuthCalls from "../hooks/useAuthCalls";
+import useAuthCalls from "../hooks/useAuthCalls";
 
 const registerSchema = Yup.object().shape({
     username: Yup.string()
@@ -35,7 +35,8 @@ const registerSchema = Yup.object().shape({
 
 
 export default function Register() {
-    // const { register } = useAuthCalls();
+    const { register } = useAuthCalls(); //! Custom Hook yazarak verileri buradan gönderdik ve useAuthCalls tan verileri alıp 
+    //! post işlemi yaptık oradanda dispatch ile redux authSlice gönderdik ve heryerde kullanır hale getirdik
 
     return (
         <Container maxWidth="lg">
@@ -85,11 +86,12 @@ export default function Register() {
                         }}
                         validationSchema={registerSchema}
                         onSubmit={(values, actions) => {
-                            // register({ ...values, password2: values.password });
+                            register({ ...values, password2: values.password });
                             actions.resetForm();
                             actions.setSubmitting(false);
                         }}
-                    component={(props) => <RegisterForm {...props} />}
+                    component={(props) => <RegisterForm {...props} />} //! önemli <RegisterForm {...props} /> 
+                    //! karmaşık olmasın diye component oluşturup values=initialValues oraya gönderdik
                     ></Formik>
                     <Box sx={{ textAlign: "center", mt: 2 }}>
                         <Link to="/">Do you have an account?</Link>
