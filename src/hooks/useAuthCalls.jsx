@@ -8,7 +8,8 @@ import {
   registerSuccess,
   fetchFail,
 } from "../features/authSlice";
-import axios from "axios";
+// import axios from "axios";
+import { axiosPublic } from "./useAxios";
 
 
 
@@ -21,9 +22,9 @@ const useAuthCalls = () => {
   //! Login işlemi yaptığımızda custom hook yazarak Login.jsx i karmaşıklığı azaltmak için 
   //! burada yaptık yup işlemini de burda yapabilirdik.
   const login = async (userInfo) => {
-    const url = "https://13549.fullstack.clarusway.com/account/auth/login/"
+    // const url = "https://13549.fullstack.clarusway.com/account/auth/login/"
     try {
-      const { data } = await axios.post(url, userInfo);
+      const { data } = await axiosPublic.post("account/auth/login/", userInfo);
       dispatch(loginSuccess(data));
       toastSuccessNotify("Login performed");
       navigate("/stock");
@@ -38,10 +39,10 @@ const useAuthCalls = () => {
   //! Logout işlemi yaptığımızda custom hook yazarak Dashboard.jsx i karmaşıklığı azaltmak için burada yaptık 
   const logout = async () => {
     dispatch(fetchStart());
-    const url = "https://13549.fullstack.clarusway.com/account/auth/logout/"
+    // const url = "https://13549.fullstack.clarusway.com/account/auth/logout/"
 
     try {
-      await axios.post(url);
+      await axiosPublic.post("account/auth/logout/");
       dispatch(logoutSuccess());
       toastSuccessNotify("Logout performed");
       navigate("/");
@@ -57,10 +58,10 @@ const useAuthCalls = () => {
   //! burada yaptık yup işlemini de burda yapabilirdik.
   const register = async (userInfo) => {
     dispatch(fetchStart());
-    const url = "https://13549.fullstack.clarusway.com/account/register/"
+    // const url = "https://13549.fullstack.clarusway.com/account/register/"
 
     try {
-      const { data } = await axios.post(url, userInfo);
+      const { data } = await axiosPublic.post("account/register/", userInfo);
       dispatch(registerSuccess(data));
       toastSuccessNotify("Register performed");
       navigate("/stock");
