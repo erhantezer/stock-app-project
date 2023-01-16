@@ -31,7 +31,7 @@ const MenuListItems = () => {
     },
     {
       icon: <AttachMoney />,
-      title: "Dashboard",
+      title: "Sales",
       url: "/stock/sales/"
     },
     {

@@ -6,6 +6,7 @@ import FirmCard from '../components/FirmCard';
 import { flexCenter } from '../styles/globalStyle';
 
 
+
 const BASE_URL = "https://13549.fullstack.clarusway.com";
 
 const Firms = () => {
@@ -20,7 +21,7 @@ const Firms = () => {
       setFirms(data)
       console.log(data)
     } catch (error) {
-
+      console.log(error);
     }
   }
 
@@ -29,8 +30,8 @@ const Firms = () => {
   }, []);
 
   return (
-    <Box>
-      <Typography variant='h4' color="error" mb={5}>
+    <Box sx={{textAlign:"center"}}>
+      <Typography  variant='h4' color="error" mb={5}>
         Firms
       </Typography>
       <Button variant="contained">
