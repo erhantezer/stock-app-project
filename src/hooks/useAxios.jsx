@@ -13,10 +13,10 @@ const useAxios = () => {
 
     const { token } = useSelector((state) => state.auth);
 
-     //* Axios Instance for Private API Request
-     const axiosWithToken = axios.create({
+    //* Axios Instance for Private API Request
+    const axiosWithToken = axios.create({
         baseURL: BASE_URL,
-        headers: { Authorization: `Token ${token}`},
+        headers: { Authorization: `Token ${token}` },
     })
 
     return { axiosWithToken };
