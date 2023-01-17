@@ -5,26 +5,42 @@ import { useSelector } from 'react-redux';
 import FirmCard from '../components/FirmCard';
 import { flexCenter } from '../styles/globalStyle';
 
+// import axios from "axios";
+
+// import { useDispatch, useSelector } from "react-redux";
+// import { fetchFail, fetchStart, getSuccess } from "../features/stockSlice";
 
 
-const BASE_URL = "https://13549.fullstack.clarusway.com";
+
 
 const Firms = () => {
-  const { token } = useSelector((state) => state.auth);
-  const [firms, setFirms] = useState([])
+  // const { getFirms } = useStockCalls();
+  const { firms } = useSelector((state) => state.stock);
+  const [open, setOpen] = useState(false);
+  const [info, setInfo] = useState({});
 
-  const getFirms = async () => {
-    try {
-      const { data } = await axios.get(`${BASE_URL}/stock/firms/`, {
-        headers: { Authorization: `Token ${token}` },
-      })
-      setFirms(data)
-      console.log(data)
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
+  // const dispatch = useDispatch();
+
+  // const { token } = useSelector((state) => state.auth);
+  // const BASE_URL = "https://10001.fullstack.clarusway.com/";
+
+  // const getFirms = async () => {
+  //   const url = "firms";
+  //   dispatch(fetchStart());
+  //   try {
+  //     const { data } = await axios.get(`${BASE_URL}stock/firms/`, {
+  //       headers: { Authorization: `Token ${token}` },
+  //     });
+  //     console.log(data);
+  //     dispatch(getSuccess({ data, url }));
+  //   } catch (error) {
+  //     dispatch(fetchFail());
+  //     console.log(error);
+  //   }
+  // };
+
+  // Firms state'inin muhtemel degisiklikler groe
   useEffect(() => {
     getFirms()
   }, []);
@@ -42,7 +58,7 @@ const Firms = () => {
         <Grid container sx={flexCenter} mt={3}>
           {firms?.map((firm) => (
             <Grid item key={firm.id}>
-              <FirmCard firm={firm}  />
+              <FirmCard firm={firm}  setOpen={setOpen} setInfo={setInfo}/>
             </Grid>
           ))}
         </Grid>
