@@ -42,7 +42,7 @@ const Firms = () => {
 
   // Firms state'inin muhtemel degisiklikler groe
   useEffect(() => {
-    getFirms()
+    // getFirms()
   }, []);
 
   return (
