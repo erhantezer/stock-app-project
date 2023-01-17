@@ -10,6 +10,7 @@ import {
 const useStockCalls = () => {
     const dispatch = useDispatch();
     const { axiosWithToken } = useAxios()
+    
 
     //!------------- GET CALLS ----------------
     const getStockData = async (url) => {
