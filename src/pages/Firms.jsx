@@ -1,8 +1,10 @@
 import { Box, Button, Grid, Typography } from '@mui/material'
-import axios from 'axios'
+// import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import FirmCard from '../components/FirmCard';
+import FirmModal from '../components/modals/FirmModal';
+import useStockCalls from '../hooks/useStockCalls';
 import { flexCenter } from '../styles/globalStyle';
 
 // import axios from "axios";
@@ -14,7 +16,7 @@ import { flexCenter } from '../styles/globalStyle';
 
 
 const Firms = () => {
-  // const { getFirms } = useStockCalls();
+  const { getFirms } = useStockCalls();
   const { firms } = useSelector((state) => state.stock);
   const [open, setOpen] = useState(false);
   const [info, setInfo] = useState({});
@@ -42,7 +44,7 @@ const Firms = () => {
 
   // Firms state'inin muhtemel degisiklikler groe
   useEffect(() => {
-    // getFirms()
+    getFirms()
   }, []);
 
   return (
@@ -50,9 +52,18 @@ const Firms = () => {
       <Typography  variant='h4' color="error" mb={5}>
         Firms
       </Typography>
-      <Button variant="contained">
+
+      <Button 
+      variant="contained"
+      onClick={() => {
+        setInfo({});
+        setOpen(true);
+      }}
+      >
         New Firm
       </Button>
+
+      <FirmModal open={open} setOpen={setOpen} info={info} setInfo={setInfo} />
 
       {firms?.length > 0 && (
         <Grid container sx={flexCenter} mt={3}>
