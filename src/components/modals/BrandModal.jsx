@@ -14,9 +14,9 @@ const BrandModal = ({ open, setOpen, info, setInfo }) => {
     e.preventDefault();
     setOpen(false);
     if (info.id) {
-      putBrand()
+      putBrand(info)
     }else {
-      postBrand()
+      postBrand(info)
     }
   }
 
