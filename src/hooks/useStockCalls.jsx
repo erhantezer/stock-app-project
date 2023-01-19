@@ -10,7 +10,7 @@ import {
 const useStockCalls = () => {
     const dispatch = useDispatch();
     const { axiosWithToken } = useAxios()
-    
+
 
     //!------------- GET CALLS ----------------
     const getStockData = async (url) => {
@@ -25,7 +25,10 @@ const useStockCalls = () => {
     };
     const getFirms = () => getStockData("firms");
     const getBrands = () => getStockData("brands")
-
+    const getSales = () => getStockData("sales");
+    const getCategories = () => getStockData("categories");
+    const getProducts = () => getStockData("products");
+    const getPurchases = () => getStockData("purchases")
 
 
     //!------------- DELETE CALLS ----------------
@@ -42,6 +45,9 @@ const useStockCalls = () => {
 
     const deleteFirm = (id) => deleteStockData("firms", id);
     const deleteBrand = (id) => deleteStockData("brands", id);
+    const deleteSale = (id) => deleteStockData("sales", id);
+    const deleteProduct = (id) => deleteStockData("products", id);
+    const deletePurchase = (id) => deleteStockData("purchases", id);
 
 
 
@@ -59,7 +65,9 @@ const useStockCalls = () => {
 
     const postFirm = (info) => postStockData(info, "firms");
     const postBrands = (info) => postStockData(info, "brands");
-
+    const postProduct = (info) => postStockData(info, "products");
+    const postSale = (info) => postStockData(info, "sales");
+    const postPurchase = (info) => postStockData(info, "purchases");
 
     //!------------- PUT CALLS ----------------
     const putStockData = async (info, url) => {
@@ -75,16 +83,30 @@ const useStockCalls = () => {
 
     const putFirm = (info) => putStockData(info, "firms");
     const putBrands = (info) => putStockData(info, "brands");
+    const putSale = (info) => putStockData(info, "sales");
+    const putPurchase = (info) => putStockData(info, "purchases");
 
     return {
         getFirms,
-        deleteFirm,
-        postFirm,
-        putFirm,
         getBrands,
-        putBrands,
-        postBrands,
+        getSales,
+        getCategories,
+        getProducts,
+        getPurchases,
+        deleteFirm,
         deleteBrand,
+        deleteSale,
+        deleteProduct,
+        deletePurchase,
+        postFirm,
+        postBrands,
+        postProduct,
+        postSale,
+        postPurchase,
+        putFirm,
+        putBrands,
+        putSale,
+        putPurchase,
     }
 
 }
