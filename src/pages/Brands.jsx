@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Typography } from '@mui/material'
+import { Alert, Box, Button, Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import BrandCard from '../components/BrandCard';
@@ -7,36 +7,48 @@ import useStockCalls from '../hooks/useStockCalls';
 import { flexCenter } from "../styles/globalStyle";
 
 const Brands = () => {
-const { getBrands } = useStockCalls();
-const { brands, loading } = useSelector((state) => state.stock);
-const [open, setOpen] = useState(false);
-const [info, setInfo] = useState({});
+  const { getBrands } = useStockCalls();
+  const { brands, loading } = useSelector((state) => state.stock);
+  const [open, setOpen] = useState(false);
+  const [info, setInfo] = useState({});
 
   useEffect(() => {
     getBrands()
   }, [])
   return (
     <Box>
-        <Typography variant='h4' color="error" mb={2} >
-          Brands
-        </Typography>
+      <Typography variant='h4' color="error" mb={2} >
+        Brands
+      </Typography>
 
-        <Button
+      <Button
+        variant="contained"
         onClick={() => {
           setOpen(true);
           setInfo({});
         }}
-        >
-          New Brand
-        </Button>
+      >
+        New Brand
+      </Button>
 
-        <BrandModal info={info} setInfo={setInfo} open={open} setOpen={setOpen} />
+      <BrandModal info={info} setInfo={setInfo} open={open} setOpen={setOpen} />
 
+      {!loading && !brands?.length && (
+        <Alert severity="warning" sx={{ mt: 4, width: "50%" }}>
+          There is no brand to show
+        </Alert>
+      )}
+
+      {brands?.length > 0 && (
         <Grid container sx={flexCenter} mt={4}>
-          <Grid item>
+          {brands?.map((brand) => (
+            <Grid item>
               <BrandCard brands={brands} setOpen={setOpen} setInfo={setInfo} />
-          </Grid>
+            </Grid>
+          ))}
         </Grid>
+      )}
+
     </Box>
   )
 }
