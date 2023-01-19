@@ -24,6 +24,7 @@ const useStockCalls = () => {
         }
     };
     const getFirms = () => getStockData("firms");
+    const getBrands = () => getStockData("brands")
 
 
 
@@ -76,6 +77,7 @@ const useStockCalls = () => {
         deleteFirm,
         postFirm,
         putFirm,
+        getBrands,
     }
 
 }
