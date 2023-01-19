@@ -41,6 +41,8 @@ const useStockCalls = () => {
     }
 
     const deleteFirm = (id) => deleteStockData("firms", id);
+    const deleteBrand = (id) => deleteStockData("brands", id);
+
 
 
     //!------------- POST CALLS ----------------
@@ -82,6 +84,7 @@ const useStockCalls = () => {
         getBrands,
         putBrands,
         postBrands,
+        deleteBrand,
     }
 
 }

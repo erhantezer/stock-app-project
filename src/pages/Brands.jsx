@@ -14,7 +14,8 @@ const Brands = () => {
 
   useEffect(() => {
     getBrands()
-  }, [])
+  }, []);
+
   return (
     <Box>
       <Typography variant='h4' color="error" mb={2} >
@@ -43,7 +44,7 @@ const Brands = () => {
         <Grid container sx={flexCenter} mt={4}>
           {brands?.map((brand) => (
             <Grid item>
-              <BrandCard brands={brands} setOpen={setOpen} setInfo={setInfo} />
+              <BrandCard brand={brand} setOpen={setOpen} setInfo={setInfo} />
             </Grid>
           ))}
         </Grid>
