@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, Modal, Select } from '@mui/material'
+import { Box, FormControl, InputLabel, MenuItem, Modal, Select } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import useStockCalls from '../../hooks/useStockCalls'
@@ -7,7 +7,7 @@ import { flexColumn, modalStyle } from '../../styles/globalStyle'
 const ProductModal = ({info, setInfo, open, setOpen}) => {
 
 const {putProduct, postProduct} = useStockCalls();
-// const { categories, brands } = useSelector()
+const { categories, brands } = useSelector()
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +46,13 @@ const {putProduct, postProduct} = useStockCalls();
               onChange={handleChange}
               required
             >
-
+            {categories?.map((category) => {
+              return (
+                <MenuItem key={category.id} value={category.id}>
+                  {category.name}
+                </MenuItem>
+              )
+            })}
             </Select>
           </FormControl>
 
