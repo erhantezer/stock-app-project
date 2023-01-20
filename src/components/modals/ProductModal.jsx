@@ -1,4 +1,4 @@
-import { Box, FormControl, InputLabel, MenuItem, Modal, Select } from '@mui/material'
+import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import useStockCalls from '../../hooks/useStockCalls'
@@ -55,6 +55,45 @@ const { categories, brands } = useSelector()
             })}
             </Select>
           </FormControl>
+
+          <FormControl fullWidth>
+            <InputLabel variant="outlined" id="brand-select">
+              Brands
+            </InputLabel>
+            <Select
+              labelId="brand-select"
+              label="Brand"
+              id="brand-select"
+              name="brand_id"
+              value={info?.brand_id || ""}
+              onChange={handleChange}
+              required
+            >
+              {brands?.map((brand) => {
+                return (
+                  <MenuItem key={brand.id} value={brand.id}>
+                    {brand.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+
+          <TextField
+            margin="dense"
+            label="Product Name"
+            name="name"
+            id="name"
+            type="text"
+            variant="outlined"
+            value={info?.name || ""}
+            onChange={handleChange}
+            required
+          />
+
+          <Button type="submit" variant="contained" size="large">
+            Add New Product
+          </Button>
 
         </Box>
       </Box>
