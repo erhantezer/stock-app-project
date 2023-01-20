@@ -2,9 +2,32 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { Form } from "formik";
+import * as Yup from "yup";
 
-const RegisterForm = ({ values, handleChange, errors, touched, handleBlur }) => {
-  
+export const registerSchema = Yup.object().shape({
+  username: Yup.string()
+    .max(10, "username must have less than 10 chars")
+    .required(),
+  first_name: Yup.string()
+    .max(20, "first name must have less than 20 chars")
+    .required(),
+  last_name: Yup.string()
+    .max(20, "last name must have less than 20 chars")
+    .required(),
+
+  email: Yup.string().email().required(),
+  password: Yup.string()
+    .required()
+    .min(8, "Password must have min 8 chars")
+    .max(16, "Password must have max 16 chars")
+    .matches(/\d+/, "Password must have a number")
+    .matches(/[a-z]+/, "Password must have a lowercase")
+    .matches(/[A-Z]+/, "Password must have an uppercase")
+    .matches(/[!,?{}><%&$#£+-.]+/, " Password must have a special char"),
+});
+
+const SignUpForm = ({ values, handleChange, errors, touched, handleBlur }) => {
+
   return (
     <div>
       <Form>
@@ -75,7 +98,7 @@ const RegisterForm = ({ values, handleChange, errors, touched, handleBlur }) => 
         </Box>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default RegisterForm
+export default SignUpForm;

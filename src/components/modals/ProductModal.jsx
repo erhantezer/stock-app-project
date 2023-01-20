@@ -1,58 +1,65 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Modal, Select, TextField } from '@mui/material'
-import React from 'react'
-import { useSelector } from 'react-redux'
-import useStockCalls from '../../hooks/useStockCalls'
-import { flexColumn, modalStyle } from '../../styles/globalStyle'
+import React from "react";
+import { flexColumn, modalStyle } from "../../styles/globalStyle";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import useStockCalls from "../../hooks/useStockCalls";
+import { useSelector } from "react-redux";
+import { MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 
-const ProductModal = ({info, setInfo, open, setOpen}) => {
-
-const {putProduct, postProduct} = useStockCalls();
-const { categories, brands } = useSelector()
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if(info.id) {
-      putProduct(info)
-    }else {
-      postProduct(info)
-    }
-    setInfo({});
-  }
+export default function ProductModal({ open, setOpen, info, setInfo }) {
+  const { postProduct, putProduct } = useStockCalls();
+  const { categories, brands } = useSelector((state) => state.stock);
 
   const handleChange = (e) => {
-    setInfo({ ...info, [e.target.name] : e.target.value})
-  }
+    e.preventDefault();
+    const { name, value } = e.target;
+    setInfo({ ...info, [name]: value });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    if (info.id) {
+      putProduct(info);
+    } else {
+      postProduct(info);
+    }
+    setInfo({});
+  };
 
   return (
     <Modal
-    open={open}
-    onClose={() => {
-      setOpen(false);
-      setInfo({})
-    }}
+      open={open}
+      onClose={() => {
+        setOpen(false);
+        setInfo({});
+      }}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Box sx={flexColumn} component="form" onSubmit={handleSubmit} >
+        <Box sx={flexColumn} component={"form"} onSubmit={handleSubmit}>
           <FormControl fullWidth>
-            <InputLabel variant='outlined' id='category-select' >
+            <InputLabel variant="outlined" id="category-select">
               Category
             </InputLabel>
             <Select
-              labelId='category-select'
+              labelId="category-select"
               label="Category"
               id="firm-select"
               name="category_id"
-              value={info?.category_id || ""} //! info varsa category id sini al bu varsa bunu al yoksa boş ata
+              value={info?.category_id || ""}
               onChange={handleChange}
               required
             >
-            {categories?.map((category) => {
-              return (
-                <MenuItem key={category.id} value={category.id}>
-                  {category.name}
-                </MenuItem>
-              )
-            })}
+              {categories?.map((category) => {
+                return (
+                  <MenuItem key={category.id} value={category.id}>
+                    {category.name}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
 
@@ -94,11 +101,8 @@ const { categories, brands } = useSelector()
           <Button type="submit" variant="contained" size="large">
             Add New Product
           </Button>
-
         </Box>
       </Box>
     </Modal>
-  )
+  );
 }
-
-export default ProductModal

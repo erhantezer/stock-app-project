@@ -1,65 +1,68 @@
-import { Box, Button, Modal, TextField } from '@mui/material'
-import React from 'react'
-import useStockCalls from '../../hooks/useStockCalls'
-import { flexColumn, modalStyle } from '../../styles/globalStyle'
+import React from "react";
+import { flexColumn, modalStyle } from "../../styles/globalStyle";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import TextField from "@mui/material/TextField";
+import useStockCalls from "../../hooks/useStockCalls";
 
-const BrandModal = ({ open, setOpen, info, setInfo }) => {
+export default function BrandModal({ open, setOpen, info, setInfo }) {
   const { postBrand, putBrand } = useStockCalls();
 
   const handleChange = (e) => {
-    setInfo({...info, [e.target.name] : e.target.value})
+    e.preventDefault();
+    const { name, value } = e.target;
+    setInfo({ ...info, [name]: value });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setOpen(false);
     if (info.id) {
-      putBrand(info)
-    }else {
-      postBrand(info)
+      putBrand(info);
+    } else {
+      postBrand(info);
     }
-  }
+    setInfo({});
+  };
 
   return (
     <Modal
-    open={open}
-    onClose={() => {
-      setOpen(false);
-      setInfo({});
-    }}
-    aria-labelledby="modal-modal-title"
-    aria-describedby="modal-modal-description"
-  >
-    <Box sx={modalStyle}>
-      <Box sx={flexColumn} component={"form"} onSubmit={handleSubmit}>
-        <TextField
-          label="Brand Name"
-          name="name"
-          id="name"
-          type="text"
-          variant="outlined"
-          value={info?.name || ""}
-          onChange={handleChange}
-          required
-        />
+      open={open}
+      onClose={() => {
+        setOpen(false);
+        setInfo({});
+      }}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
+    >
+      <Box sx={modalStyle}>
+        <Box sx={flexColumn} component={"form"} onSubmit={handleSubmit}>
+          <TextField
+            label="Brand Name"
+            name="name"
+            id="name"
+            type="text"
+            variant="outlined"
+            value={info?.name || ""}
+            onChange={handleChange}
+            required
+          />
 
-        <TextField
-          label="Image Url"
-          name="image"
-          id="image"
-          type="url"
-          variant="outlined"
-          value={info?.image || ""}
-          onChange={handleChange}
-        />
+          <TextField
+            label="Image Url"
+            name="image"
+            id="image"
+            type="url"
+            variant="outlined"
+            value={info?.image || ""}
+            onChange={handleChange}
+          />
 
-        <Button type="submit" variant="contained" size="large">
-          Save Brand
-        </Button>
+          <Button type="submit" variant="contained" size="large">
+            Save Brand
+          </Button>
+        </Box>
       </Box>
-    </Box>
-  </Modal>
-  )
+    </Modal>
+  );
 }
-
-export default BrandModal

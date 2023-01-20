@@ -7,21 +7,19 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { arrowStyle, btnHoverStyle } from "../../styles/globalStyle";
-import { Typography } from "@mui/material";
-import useStockCalls from "../../hooks/useStockCalls";
-import { useSelector } from "react-redux";
-import useSortColumn from "../../hooks/useSortColumn";
 import UpgradeIcon from "@mui/icons-material/Upgrade";
 import VerticalAlignBottomIcon from "@mui/icons-material/VerticalAlignBottom";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-
+import useSortColumn from "../../hooks/useSortColumn";
+import { arrowStyle, btnHoverStyle } from "../../styles/globalStyle";
+import useStockCalls from "../../hooks/useStockCalls";
+import { useSelector } from "react-redux";
+import { Typography } from "@mui/material";
 
 const ProductsTable = ({ selectedProducts, selectedBrands }) => {
   const { deleteProduct } = useStockCalls();
   const { products } = useSelector((state) => state.stock);
-
 
   const columnObj = {
     brand: 1,
@@ -29,7 +27,6 @@ const ProductsTable = ({ selectedProducts, selectedBrands }) => {
     stock: 1,
     id: 1,
   };
-
 
   const { sortedData, handleSort, columns } = useSortColumn(
     products,
@@ -41,10 +38,10 @@ const ProductsTable = ({ selectedProducts, selectedBrands }) => {
   //? bu fonksiyon filter() icerisinde yazilacagi icin false dondurmesi
   //? durumunda filter bir suzme yapmamis olur.
   const isBrandSelected = (item) =>
-  selectedBrands.includes(item.brand) || selectedBrands.length === 0;
+    selectedBrands.includes(item.brand) || selectedBrands.length === 0;
 
-const isProductSelected = (item) =>
-  selectedProducts.includes(item.name) || selectedProducts.length === 0;
+  const isProductSelected = (item) =>
+    selectedProducts.includes(item.name) || selectedProducts.length === 0;
 
   return (
     <TableContainer component={Paper} sx={{ mt: 3 }} elevation={10}>
@@ -92,7 +89,7 @@ const isProductSelected = (item) =>
           </TableRow>
         </TableHead>
         <TableBody>
-        {sortedData
+          {sortedData
             ?.filter((item) => isBrandSelected(item))
             .filter((item) => isProductSelected(item))
             .map((product) => (

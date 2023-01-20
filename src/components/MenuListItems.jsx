@@ -1,87 +1,79 @@
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import {
-  AttachMoney,
-  Dashboard,
-  Inventory,
-  ShoppingCart,
-  Stars, Store,
-  SupervisorAccount
-} from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import StoreIcon from "@mui/icons-material/Store";
+import StarsIcon from "@mui/icons-material/Stars";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import { useNavigate } from "react-router-dom";
 
+const icons = [
+  {
+    icon: <DashboardIcon />,
+    title: "Dashboard",
+    url: "/stock/",
+  },
+  {
+    title: "Purchase",
+    icon: <ShoppingCartIcon />,
+    url: "/stock/purchases/",
+  },
+  {
+    title: "Sales",
+    icon: <AttachMoneyIcon />,
+    url: "/stock/sales/",
+  },
+  {
+    title: "Firms",
+    icon: <StoreIcon />,
+    url: "/stock/firms/",
+  },
+  {
+    title: "Brands",
+    icon: <StarsIcon />,
+    url: "/stock/brands/",
+  },
+  {
+    title: "Products",
+    icon: <InventoryIcon />,
+    url: "/stock/products/",
+  },
+  {
+    title: "Admin Panel",
+    icon: <SupervisorAccountIcon />,
+    url: "https://10001.fullstack.clarusway.com/admin",
+  },
+];
+
+const iconStyle = {
+  color: "#eee",
+  "& .MuiSvgIcon-root": { color: "#eee" },
+  "&:hover": { color: "red" },
+  "&:hover .MuiSvgIcon-root": { color: "red" },
+};
 
 const MenuListItems = () => {
-  const navigate = useNavigate()
-
-
-  const navItems = [
-    {
-      icon: <Dashboard />,
-      title: "Dashboard",
-      url: "/stock/"
-    },
-    {
-      icon: <ShoppingCart />,
-      title: "Purchase",
-      url: "/stock/purchases"
-    },
-    {
-      icon: <AttachMoney />,
-      title: "Sales",
-      url: "/stock/sales/"
-    },
-    {
-      icon: <Store />,
-      title: "Firms",
-      url: "/stock/firms/"
-    },
-    {
-      icon: <Stars />,
-      title: "Brands",
-      url: "/stock/brands/"
-    },
-    {
-      icon: <Inventory />,
-      title: "Products",
-      url: "/stock/products/"
-    },
-    {
-      icon: <SupervisorAccount />,
-      title: "Admin Panel",
-      url: "https://13549.fullstack.clarusway.com/admin",
-    },
-  ]
-
-  const iconStyle = {
-    color: "#eee",
-    "& .MuiSvgIcon-root": { color: "#eee" },
-    "&:hover": { color: "red", bgcolor: "lightBlue" },
-    "&:hover .MuiSvgIcon-root": { color: "red" }
-  }
-
+  const navigate = useNavigate();
   return (
     <div>
       <List>
-        {navItems?.map((item, index) => (
+        {icons?.map((item, index) => (
           <ListItem key={index} disablePadding>
             {item.url.includes("http") && (
               <ListItemButton to={item.url} sx={iconStyle}>
-                <ListItemIcon>
-                  {item.icon}
-                </ListItemIcon>
+                <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItemButton>
             )}
 
             {!item.url.includes("http") && (
               <ListItemButton onClick={() => navigate(item.url)} sx={iconStyle}>
-                <ListItemIcon>
-                  {item.icon}
-                </ListItemIcon>
+                <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.title} />
               </ListItemButton>
             )}
@@ -89,7 +81,7 @@ const MenuListItems = () => {
         ))}
       </List>
     </div>
-  )
-}
+  );
+};
 
-export default MenuListItems
+export default MenuListItems;
