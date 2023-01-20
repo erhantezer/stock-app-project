@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-initialState = {
+
+
+const stockSlice = createSlice({
+name: "stock",
+initialState : {
   purchases: null,
   sales: null,
   products: null,
@@ -10,11 +14,7 @@ initialState = {
   categories: null,
   loading: false,
   error: false,
-};
-
-const stockSlice = createSlice({
-name: "stock",
-initialState: initialState,
+},
 
 
   reducers: {
